@@ -1,8 +1,7 @@
 #!/usr/bin/env bash
 
-echo "---"
-echo "addons:"
-echo "config_vars:"
-echo "  PATH: $PATH:/app/vendor/libvips/bin"
-echo "  LD_RUN_PATH: $LD_RUN_PATH:/app/vendor/libvips/lib"
-echo "default_process_types:"
+cat <<EOF
+---
+config_vars:
+  PATH: bin:/usr/local/bin:/usr/bin:/bin
+EOF

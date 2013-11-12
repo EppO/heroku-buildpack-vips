@@ -14,8 +14,20 @@ cd $1
 # download the vips binary (-O) silently (-s)
 curl $S3_URL -s -O
 
+echo "Download completed"
+
 # make a directory to untar (like unzip) the binary
 mkdir -p vendor/libvips
 
 # untar the binary to the directory we want
 tar -C vendor/libvips -xvf $VIPS_PACKAGE 
+
+mkdir -p "$BUILD_DIR/bin/"
+cp vendor/libvips/bin/* "$BUILD_DIR/bin/"
+
+echo "Installation completed"
+
+echo "Building runtime environment for imagemagick" | arrow
+mkdir -p $BUILD_DIR/.profile.d
+echo "export PATH=\"\$HOME/bin:\$PATH\"" > $BUILD_DIR/.profile.d/vips.sh
+echo "export LD_RUN_PATH=\"$BUILD_DIR/vendor/libvips/lib:\$LD_RUN_PATH\"" > $BUILD_DIR/.profile.d/vips.sh
