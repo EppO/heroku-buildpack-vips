@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 # bin/compile <build-dir> <cache-dir>
 
+BUILD_DIR=$1
+CACHE_DIR=$2
 VIPS_VERSION="7.36.3"
 VIPS_PACKAGE="vips-${VIPS_VERSION}.tgz"
 S3_BUCKET="heroku-buildpack-vips"
