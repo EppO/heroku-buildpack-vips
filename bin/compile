@@ -35,4 +35,4 @@ echo "export VIPSHOME=\"$BUILD_DIR/vendor/libvips\"" > $BUILD_DIR/.profile.d/vip
 echo "export PATH=\"\$VIPSHOME/bin:$BUILD_DIR/bin:\$PATH\"" >> $BUILD_DIR/.profile.d/vips.sh
 echo "export LD_RUN_PATH=\"\$VIPSHOME/lib:\$LD_RUN_PATH\"" >> $BUILD_DIR/.profile.d/vips.sh
 echo "export LD_LIBRARY_PATH=\"\$VIPSHOME/lib:\$LD_LIBRARY_PATH\"" >> $BUILD_DIR/.profile.d/vips.sh
-echo "export PKG_CONFIG_PATH=\"\$VIPSHOME/lib/pkgconfig:\$PKG_CONFIG_PATH\""
+echo "export PKG_CONFIG_PATH=\"\$VIPSHOME/lib/pkgconfig:\$PKG_CONFIG_PATH\"" >> $BUILD_DIR/.profile.d/vips.sh
