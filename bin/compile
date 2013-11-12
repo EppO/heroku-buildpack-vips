@@ -1,38 +1,18 @@
 #!/usr/bin/env bash
 # bin/compile <build-dir> <cache-dir>
 
-BUILD_DIR=$1
-CACHE_DIR=$2
-VIPS_VERSION="7.36.3"
-VIPS_PACKAGE="vips-${VIPS_VERSION}.tgz"
-S3_BUCKET="heroku-buildpack-vips"
-S3_URL="https://s3.amazonaws.com/${S3_BUCKET}/${VIPS_PACKAGE}"
+function indent() {
+  c='s/^/       /'
+  case $(uname) in
+    Darwin) sed -l "$c";;
+    *)      sed -u "$c";;
+  esac
+}
 
 echo "-----> Installing libvips like a boss"
 
 # change to the the BUILD_DIR ($1)
 cd $1
 
-# download the vips binary (-O) silently (-s)
-curl $S3_URL -s -O
-
-echo "-----> Download completed"
-
-# make a directory to untar (like unzip) the binary
-mkdir -p vendor/libvips
-
-# untar the binary to the directory we want
-tar -C vendor/libvips -xf $VIPS_PACKAGE 
-
-mkdir -p "$BUILD_DIR/bin/"
-cp vendor/libvips/bin/* "$BUILD_DIR/bin/"
-
-echo "-----> Installation completed"
-
-echo "-----> Building runtime environment for vips"
-mkdir -p $BUILD_DIR/.profile.d
-echo "export VIPSHOME=\"$BUILD_DIR/vendor/libvips\"" > $BUILD_DIR/.profile.d/vips.sh
-echo "export PATH=\"\$VIPSHOME/bin:$BUILD_DIR/bin:\$PATH\"" >> $BUILD_DIR/.profile.d/vips.sh
-echo "export LD_RUN_PATH=\"\$VIPSHOME/lib:\$LD_RUN_PATH\"" >> $BUILD_DIR/.profile.d/vips.sh
-echo "export LD_LIBRARY_PATH=\"\$VIPSHOME/lib:\$LD_LIBRARY_PATH\"" >> $BUILD_DIR/.profile.d/vips.sh
-echo "export PKG_CONFIG_PATH=\"\$VIPSHOME/lib/pkgconfig:\$PKG_CONFIG_PATH\"" >> $BUILD_DIR/.profile.d/vips.sh
+sudo apt-get -y install libvips-dev
+echo "libvips installed" | indent
