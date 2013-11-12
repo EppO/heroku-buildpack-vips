@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+# bin/compile <build-dir> <cache-dir>
+
+VIPS_VERSION="7.36.3"
+VIPS_PACKAGE="vips-${VIPS_VERSION}.tgz"
+S3_BUCKET="heroku-buildpack-vips"
+S3_URL="https://s3.amazonaws.com/${S3_BUCKET}/${VIPS_PACKAGE}"
+
+echo "-----> Installing libvips like a boss"
+
+# change to the the BUILD_DIR ($1)
+cd $1
+
+# download the vips binary (-O) silently (-s)
+curl $S3_URL -s -O
+
+# make a directory to untar (like unzip) the binary
+mkdir -p vendor/libvips
+
+# untar the binary to the directory we want
+tar -C vendor/libvips -xvf $VIPS_PACKAGE 
