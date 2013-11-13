@@ -9,10 +9,22 @@ function indent() {
   esac
 }
 
-echo "-----> Installing libvips like a boss"
+arrow() {
+  sed -u 's/^/-----> /'
+}
+
+echo "Installing libvips like a boss" | arrow
 
 # change to the the BUILD_DIR ($1)
+echo "getting in $1"
 cd $1
 
-sudo apt-get -y install libvips-dev
+output_dir="/app/vendor/vips"
+
+echo "downloading libvips" | indent
+curl -s https://api.anvilworks.org/slugs/833ee167-5661-4326-8fd7-b0c73f060886.tgz | tar xz -C $output_dir
+
+echo "unpacking libvips" | indent
+cp -r $output_dir/bin/* /app/bin
+
 echo "libvips installed" | indent
