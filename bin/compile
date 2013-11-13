@@ -25,7 +25,7 @@ output_dir="${BUILD_DIR}/vendor/vips"
 mkdir -p $output_dir
 
 echo "downloading libvips" | indent
-curl -s https://api.anvilworks.org/slugs/833ee167-5661-4326-8fd7-b0c73f060886.tgz | tar xz -C $output_dir
+curl -s  http://vulcan-eppo.herokuapp.com/output/d537ba31-20e5-4169-9f49-9fafaf223760 | tar xz -C $output_dir
 
 echo "unpacking libvips" | indent
 cp -r $output_dir/bin/* $BUILD_DIR/bin/
