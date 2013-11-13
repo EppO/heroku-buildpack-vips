@@ -19,7 +19,6 @@ CACHE_DIR=$2
 echo "Installing libvips like a boss" | arrow
 
 # change to the the BUILD_DIR ($BUILD_DIR)
-echo "getting in $BUILD_DIR"
 cd $1
 
 output_dir="${BUILD_DIR}/vendor/vips"
