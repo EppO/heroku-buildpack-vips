@@ -24,7 +24,6 @@ cd $1
 
 output_dir="${BUILD_DIR}/vendor/vips"
 mkdir -p $output_dir
-mkdir $BUILD_DIR/bin
 
 echo "downloading libvips" | indent
 curl -s https://api.anvilworks.org/slugs/833ee167-5661-4326-8fd7-b0c73f060886.tgz | tar xz -C $output_dir
